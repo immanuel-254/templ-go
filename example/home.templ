@@ -1,0 +1,31 @@
+package main
+
+
+script WithParameters(a string, b string, c int) {
+	console.log(a, b, c);
+}
+
+script WithoutParameters() {
+	alert("hello");
+}
+
+css red() {
+	background-color: #ff0000;
+}
+
+css text_white() {
+	color: white;
+}
+
+templ Button(text string) {
+	<button class={ red(), text_white() } onClick={ WithParameters("test", text, 123) } onMouseover={ WithoutParameters() } type="button">{ text }</button>
+}
+
+templ Home() {
+    @Button("Submit")
+}
+
+templ Base(body templ.Component) {
+    <div>Base</div>
+    @body
+}
