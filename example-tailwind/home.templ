@@ -1,0 +1,9 @@
+package main
+
+templ Button(text string) {
+	<button class={ "btn", "font-semibold" } type="button">{ text }</button>
+}
+
+templ Home() {
+    @Button("Submit")
+}

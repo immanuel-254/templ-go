@@ -146,3 +146,26 @@ func GenerateCSS(file string, components ...templ.CSSClass) error {
 	}
 	return nil
 }
+
+func GenerateTailwindInputCss(file string, apply ...string) {
+	var css string = "@tailwind base;\n@tailwind components;\n@tailwind utilities;\n"
+
+	for i, a := range apply {
+		if i > 0 {
+			css = css + "\n"
+		}
+		css = css + a
+	}
+
+	// Create or open a file for writing
+	f, err := os.Create(file)
+	if err != nil {
+		panic(err)
+	}
+	defer f.Close()
+
+	_, err = f.WriteString(css)
+	if err != nil {
+		panic(err)
+	}
+}

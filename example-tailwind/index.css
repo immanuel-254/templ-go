@@ -1,0 +1,5 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.btn{@apply flex justify-center items-center p-4 bg-gray-100 rounded-lg shadow-md;}
+.mn{@apply flex justify-center items-center;}
