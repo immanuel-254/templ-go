@@ -19,6 +19,10 @@ func (Component) RemoveScriptTags(html string) string {
 	return RemoveScriptTags(html)
 }
 
+func (Component) RemoveCssTags(html string) string {
+	return RemoveCssTags(html)
+}
+
 func (Component) RenderHtmlToString(removeWords []string, components ...templ.Component) (string, error) {
 	html, err := RenderHtmlToString(removeWords, components...)
 	if err != nil {
@@ -30,6 +34,11 @@ func (Component) RenderHtmlToString(removeWords []string, components ...templ.Co
 
 func RemoveScriptTags(html string) string {
 	re := regexp.MustCompile(`(?is)<script.*?>.*?</script>`)
+	return re.ReplaceAllString(html, "")
+}
+
+func RemoveCssTags(html string) string {
+	re := regexp.MustCompile(`(?is)<style.*?>.*?</style>`)
 	return re.ReplaceAllString(html, "")
 }
 
@@ -68,6 +77,7 @@ func GenerateComponent(removeWords []string, components ...templ.Component) temp
 	}
 
 	str = mycomponent.RemoveScriptTags(str)
+	str = mycomponent.RemoveCssTags(str)
 
 	mycomponent.ComponentFunc = templ.ComponentFunc(func(ctx context.Context, w io.Writer) error {
 		_, err := io.WriteString(w, str)
